@@ -3,12 +3,13 @@ import logging
 from uuid import UUID
 
 from application.common.ports.transactional_manager import TransactionalManager
-from application.common.usecase import (
+from application.common.usecase.base import (
     BaseUseCaseCommand,
     BaseUseCaseResult,
     BaseUseCase,
 )
 from application.bot.ports.datamappers.text import TextDataMapper
+from application.bot.usecases.delete_by_id.exceptions import CannotConvertToUUIDException
 from infra.common.adapters.log.constants import LogType
 
 
@@ -47,7 +48,14 @@ class DeleteTextByIdUseCase(BaseUseCase[DeleteTextByIdUseCaseCommand, DeleteText
     _transactional_manager: TransactionalManager
 
     async def act(self, command: DeleteTextByIdUseCaseCommand) -> DeleteTextByIdUseCaseResult:
-        await self._text_datamapper.delete_by_id(text_id=UUID(command.text_id))
+        try:
+            text_uuid = UUID(command.text_id)
+
+        except:
+
+            raise CannotConvertToUUIDException()
+
+        await self._text_datamapper.delete_by_id(text_id=text_uuid)
 
         await self._transactional_manager.commit()
 

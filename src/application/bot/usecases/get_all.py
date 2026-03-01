@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import logging
 
 from application.bot.dto.text import TextDto
-from application.common.usecase import (
+from application.common.usecase.base import (
     BaseUseCaseCommand,
     BaseUseCaseResult,
     BaseUseCase,

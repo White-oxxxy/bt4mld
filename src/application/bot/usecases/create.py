@@ -5,7 +5,7 @@ from application.bot.dto.text import TextDto
 from application.bot.ports.datamappers.text import TextDataMapper
 from application.common.ports.transactional_manager import TransactionalManager
 from application.common.ports.id_generator import IdGenerator
-from application.common.usecase import (
+from application.common.usecase.base import (
     BaseUseCaseCommand,
     BaseUseCaseResult,
     BaseUseCase,

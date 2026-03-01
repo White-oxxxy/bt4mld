@@ -4,17 +4,17 @@ from abc import (
 )
 from dataclasses import dataclass
 
-from infra.common.exceptions import InfraException
+from application.common.exceptions import ApplicationError
 
 
 @dataclass(eq=False)
-class DataMapperException(
-    InfraException,
+class UseCaseException(
+    ApplicationError,
     ABC,
 ):
     @abstractmethod
     @property
     def message(self) -> str:
-        message = f"Data mapper exception!"
+        message = f"Use case exception!"
 
         return message
